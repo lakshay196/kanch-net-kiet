@@ -19,36 +19,36 @@ const discoverySamples = [
     rowId: "ROW-101",
     displayId: "B-101",
     tone: "ok",
-    status: "In the rehearsed sample",
-    reason: "Shown as stock that can join the sample order.",
+    status: "In",
+    reason: "",
   },
   {
     rowId: "ROW-102",
     displayId: "B-102",
     tone: "ok",
-    status: "In the rehearsed sample",
-    reason: "Shown as stock that can join the sample order.",
+    status: "In",
+    reason: "",
   },
   {
     rowId: "ROW-103",
     displayId: "B-103",
     tone: "ok",
-    status: "In the rehearsed sample",
-    reason: "Shown as stock that can join the sample order.",
+    status: "In",
+    reason: "",
   },
   {
     rowId: "ROW-104",
     displayId: "B-104",
     tone: "no",
-    status: "Excluded in the sample",
-    reason: "Size is 2.6; the buyer asked for 2.4.",
+    status: "Out",
+    reason: "Size is 2.6. The buyer asked for 2.4.",
   },
   {
     rowId: "ROW-105",
     displayId: "B-105",
     tone: "no",
-    status: "Excluded in the sample",
-    reason: "Same physical batch as B-101. Those pieces are not counted twice.",
+    status: "Out",
+    reason: "Same physical batch as B-101. Not counted twice.",
   },
 ] as const;
 
@@ -82,8 +82,12 @@ function listingFor(listingId: string) {
   return listing;
 }
 
+function person(name: string) {
+  return name.replace(" (Illustrative Supplier)", "");
+}
+
 function pieces(value: number) {
-  return `${new Intl.NumberFormat("en-IN").format(value)} pieces`;
+  return new Intl.NumberFormat("en-IN").format(value);
 }
 
 function rupee(value: number) {
@@ -104,22 +108,18 @@ function sampleDate(iso: string) {
   }).format(new Date(Date.UTC(year, month - 1, day)));
 }
 
-function Field({
+function Fact({
   label,
-  labelHi,
   value,
   missing = false,
 }: {
   label: string;
-  labelHi: string;
   value: string;
   missing?: boolean;
 }) {
   return (
-    <div className="demo-field">
-      <span className="demo-label">
-        {label} <span lang="hi">/ {labelHi}</span>
-      </span>
+    <div>
+      <span className="demo-label">{label}</span>
       <span className={missing ? "demo-value is-missing" : "demo-value"}>
         {value}
       </span>
@@ -135,66 +135,32 @@ export default function DemoShell() {
     <>
       <StageHeader />
       <main className="demo-main" id="demo-main">
-        <div className="demo-intro">
-          <h1 className="demo-display">
-            One glass-bangle order, four stages
-            <span lang="hi">एक काँच-चूड़ी ऑर्डर, चार चरण</span>
-          </h1>
-          <p>
-            A buyer describes 1,000 bangles. Suppliers cover that ask together.
-            This page opens directly, with no portal login.
+        <section className="demo-hero" id="buyer-request" aria-labelledby="buyer-request-title">
+          <p className="demo-kicker">01 · Buyer / खरीदार</p>
+          <h1 id="buyer-request-title">{SAMPLE_BUYER_TEXT}</h1>
+          <hr className="demo-rule" />
+          <p className="demo-lead">
+            Colour and finish are still blank, so this request cannot be
+            confirmed. Demo year on the date is 2026.
           </p>
-          <p className="demo-muted" lang="hi">
-            खरीदार 1,000 चूड़ियों की माँग लिखता है। कई आपूर्तिकर्ता मिलकर वह
-            मात्रा पूरी करते हैं। यह पेज बिना लॉगिन खुलता है।
+          <p className="demo-gate" id="buyer-request-gate" lang="hi">
+            रंग या फिनिश खाली हो तो माँग आगे नहीं बढ़ती।
           </p>
-        </div>
-
-        <StageSection
-          id="buyer-request"
-          kicker="Stage 1 · first focus"
-          title="Buyer request"
-          titleHi="खरीदार की माँग"
-          role="Buyer"
-          roleHi="खरीदार"
-          gate="The order cannot move on while colour or finish is missing."
-          gateHi="रंग या फिनिश खाली हो तो माँग आगे नहीं बढ़ती।"
-        >
-          <blockquote className="demo-quote">{SAMPLE_BUYER_TEXT}</blockquote>
-          <div className="demo-fields">
-            <Field label="Product" labelHi="सामान" value="Glass bangle" />
-            <Field
-              label="Quantity"
-              labelHi="मात्रा"
-              value={pieces(draft.quantityNeeded)}
+          <div className="demo-facts">
+            <Fact label="Product" value="Glass bangle" />
+            <Fact label="Quantity" value={pieces(draft.quantityNeeded)} />
+            <Fact label="Size" value={draft.sizeCode ?? "Missing"} />
+            <Fact
+              label="Date"
+              value={draft.deliveryDate ? sampleDate(draft.deliveryDate) : "Missing"}
             />
-            <Field label="Size" labelHi="साइज़" value={draft.sizeCode ?? "Missing"} />
-            <Field
-              label="Delivery date"
-              labelHi="तारीख"
-              value={
-                draft.deliveryDate
-                  ? `${sampleDate(draft.deliveryDate)} · demo year 2026`
-                  : "Missing"
-              }
-            />
-            <Field
-              label="Colour"
-              labelHi="रंग"
-              value={draft.colour ?? "Missing"}
-              missing={draft.colour === null}
-            />
-            <Field
-              label="Design / finish"
-              labelHi="फिनिश"
+            <Fact label="Colour" value={draft.colour ?? "Missing"} missing={draft.colour === null} />
+            <Fact
+              label="Finish"
               value={draft.designFinish ?? "Missing"}
               missing={draft.designFinish === null}
             />
-            <Field
-              label="Delivery locality"
-              labelHi="जगह"
-              value={draft.deliveryLocality ?? "Missing"}
-            />
+            <Fact label="Place" value={draft.deliveryLocality ?? "Missing"} />
           </div>
           <div className="demo-actions">
             <button
@@ -205,51 +171,38 @@ export default function DemoShell() {
             >
               Confirm request · locked
             </button>
-            <p className="demo-muted">
-              The next action stays locked until the missing fields are filled.
-            </p>
           </div>
-        </StageSection>
+        </section>
 
         <StageSection
           id="supplier-discovery"
-          kicker="Stage 2"
-          title="Supplier discovery"
-          titleHi="आपूर्तिकर्ता खोजना"
+          kicker="02 · Stock"
+          title="Who has pieces"
+          titleHi="किसके पास माल है"
           role="Coordinator"
           roleHi="समन्वयक"
-          gate="Stock that does not match is marked excluded, with a plain reason."
-          gateHi="जो स्टॉक मेल नहीं खाता, वह कारण के साथ अलग दिखता है।"
+          gate="Stock that does not match is left out, with a plain reason."
         >
-          <p className="demo-muted">
-            Rehearsed sample rows. The working check arrives in a later step.
-            Artisan <span lang="hi">/ कारीगर</span> names below are illustrative.
-          </p>
-          <div className="demo-rows">
+          <div className="demo-lines">
             {discoverySamples.map((sample) => {
               const batch = batchFor(sample.rowId);
               const supplier = supplierFor(batch.supplierId);
               const listing = listingFor(batch.listingId);
               return (
-                <article className="demo-row" key={sample.rowId}>
-                  <header>
-                    <h3>
-                      {sample.displayId} · {supplier.displayName}
-                    </h3>
-                    <span className={`demo-pill is-${sample.tone}`}>
+                <article className="demo-line" key={sample.rowId}>
+                  <strong>{sample.displayId}</strong>
+                  <div>
+                    <p className="demo-who">{person(supplier.displayName)}</p>
+                    <p className="demo-meta">
+                      {supplier.locality} · {batch.distanceKm} km · size {listing.sizeCode} · rate{" "}
+                      {batch.illustrativeAcceptanceRate}
+                    </p>
+                    <p className={`demo-state is-${sample.tone}`}>
                       {sample.status}
-                    </span>
-                  </header>
-                  <p className="demo-meta">
-                    <span>{supplier.locality}</span>
-                    <span>{batch.distanceKm} km</span>
-                    <span>{pieces(batch.declaredQty)}</span>
-                    <span>Size {listing.sizeCode}</span>
-                    <span>
-                      Illustrative acceptance rate {batch.illustrativeAcceptanceRate}
-                    </span>
-                  </p>
-                  <p>{sample.reason}</p>
+                      {sample.reason ? ` · ${sample.reason}` : ""}
+                    </p>
+                  </div>
+                  <p className="demo-who">{pieces(batch.declaredQty)}</p>
                 </article>
               );
             })}
@@ -258,47 +211,38 @@ export default function DemoShell() {
 
         <StageSection
           id="aggregation"
-          kicker="Stage 3 · second focus"
-          title="Aggregation"
-          titleHi="मात्रा जोड़ना"
+          kicker="03 · Cover"
+          title="Does it cover 1,000?"
+          titleHi="क्या 1,000 पूरी होती है"
           role="Coordinator"
           roleHi="समन्वयक"
-          gate="Approval stays locked when the plan does not cover the pieces asked."
-          gateHi="मांगी गई मात्रा पूरी न हो तो मंजूरी बंद रहती है।"
+          gate="Approval stays locked until the request is confirmed and the pieces cover the ask."
         >
-          <div className="demo-figures">
-            <div className="demo-figure">
-              <span className="demo-label">Pieces asked / मांगी मात्रा</span>
+          <div className="demo-pair">
+            <div>
+              <span className="demo-label">Pieces asked</span>
               <strong>{pieces(draft.quantityNeeded)}</strong>
             </div>
-            <div className="demo-figure">
-              <span className="demo-label">Shortfall gate / कमी पर रोक</span>
+            <div>
+              <span className="demo-label">Approval</span>
               <strong>Locked</strong>
-              <span className="demo-muted">
-                Approval cannot open while the request is still missing colour
-                and finish.
-              </span>
+              <p className="demo-note">Colour and finish are still missing.</p>
             </div>
           </div>
-          <p className="demo-muted">
-            Rehearsed cover, shown as a label only: B-101, B-102, and B-103.
-          </p>
-          <div className="demo-plan">
+          <div className="demo-lines">
             {planSamples.map((sample) => {
               const batch = batchFor(sample.rowId);
               const supplier = supplierFor(batch.supplierId);
               return (
-                <article className="demo-plan-line" key={sample.rowId}>
-                  <header>
-                    <h3>
-                      {sample.displayId} · {supplier.displayName}
-                    </h3>
-                    <span>{pieces(batch.declaredQty)}</span>
-                  </header>
-                  <p className="demo-meta">
-                    <span>{supplier.locality}</span>
-                    <span>{batch.distanceKm} km</span>
-                  </p>
+                <article className="demo-line" key={sample.rowId}>
+                  <strong>{sample.displayId}</strong>
+                  <div>
+                    <p className="demo-who">{person(supplier.displayName)}</p>
+                    <p className="demo-meta">
+                      {supplier.locality} · {batch.distanceKm} km
+                    </p>
+                  </div>
+                  <p className="demo-who">{pieces(batch.declaredQty)}</p>
                 </article>
               );
             })}
@@ -317,36 +261,29 @@ export default function DemoShell() {
 
         <StageSection
           id="quality-settlement"
-          kicker="Stage 4"
-          title="Quality and simulated settlement"
-          titleHi="जाँच और सिम्युलेटेड हिसाब"
+          kicker="04 · Settlement"
+          title="Simulated money"
+          titleHi="सिम्युलेटेड हिसाब"
           role="Collector"
           roleHi="संग्रहकर्ता"
           gate="Settlement stays locked until accepted, rework, rejected, and damaged pieces equal the pieces collected."
-          gateHi="जाँच की चार मात्राएँ, इकट्ठी मात्रा के बराबर हुए बिना हिसाब बंद रहता है।"
         >
-          <div className="demo-fields">
-            <Field label="Collected" labelHi="इकट्ठा" value={pieces(totals.collectedQty)} />
-            <Field label="Accepted" labelHi="स्वीकृत" value={pieces(totals.acceptedQty)} />
-            <Field label="Rework" labelHi="दोबारा काम" value={pieces(totals.reworkQty)} />
-            <Field label="Rejected" labelHi="अस्वीकृत" value={pieces(totals.rejectedQty)} />
-            <Field label="Damaged" labelHi="क्षतिग्रस्त" value={pieces(totals.damagedQty)} />
-          </div>
-          <div className="demo-figures">
-            <div className="demo-figure">
-              <span className="demo-label">Simulated supplier net</span>
+          <p className="demo-note">
+            {pieces(totals.collectedQty)} collected · {pieces(totals.acceptedQty)} accepted ·{" "}
+            {pieces(totals.reworkQty)} rework · {pieces(totals.rejectedQty)} rejected ·{" "}
+            {pieces(totals.damagedQty)} damaged
+          </p>
+          <div className="demo-pair">
+            <div>
+              <span className="demo-label">Supplier net · simulated</span>
               <strong>{rupee(totals.supplierNet)}</strong>
-              <span className="demo-muted">Simulated. Not a payment.</span>
             </div>
-            <div className="demo-figure">
-              <span className="demo-label">Simulated buyer payable</span>
+            <div>
+              <span className="demo-label">Buyer payable · simulated</span>
               <strong>{rupee(totals.buyerPayable)}</strong>
-              <span className="demo-muted">
-                Simulated. This is a different side of the sample, not profit.
-              </span>
+              <p className="demo-note">A different side of the sample. Not profit. No payment is sent.</p>
             </div>
           </div>
-          <p>No payment is sent from this page.</p>
         </StageSection>
       </main>
     </>
