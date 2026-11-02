@@ -1,0 +1,6 @@
+---
+description: Safe Git workflow for the shared repository
+alwaysApply: true
+---
+
+Check git status and branch before editing. Feature branches start from clean updated develop; PRs target develop. Do not pull or switch over uncommitted edits. Stage only owned files, run checks before commit, never force-push, never reset --hard, and never merge main/develop directly. Builder B controls integration and release.

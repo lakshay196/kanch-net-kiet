@@ -1,0 +1,6 @@
+---
+description: Kanch-Net v2 project contract and phase boundaries
+alwaysApply: true
+---
+
+Read AGENTS.md, docs/PRD.md, docs/CONTRACT.md, docs/TASK-OWNERSHIP.md, and docs/GUIDE-A.md before editing. Implement only Builder A's current approved phase. Do not edit Builder B's files or invent API fields. Ask B for shared-file changes. Run actual checks and stop with a phase report.

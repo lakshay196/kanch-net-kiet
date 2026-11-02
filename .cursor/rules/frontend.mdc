@@ -1,0 +1,7 @@
+---
+description: Kanch-Net demo frontend ownership and quality
+globs: app/demo/**,components/demo/**,public/demo/**
+alwaysApply: false
+---
+
+Builder A owns these files. Use contract types and B's domain functions; no duplicated business rules. Build the premium bilingual four-stage demo with missing-field confirmation, explicit shortfall, balanced quality, simulated money labels, responsive layouts, keyboard focus, and reduced motion. Inspect actual browser output at mobile/tablet/desktop sizes.
