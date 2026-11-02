@@ -6,17 +6,15 @@ Git records local file history. GitHub hosts the shared remote. A clone is your 
 
 ## One repository and access
 
-The existing remote is `https://github.com/lakshay196/kanch-net-kiet.git`. Use it; do not create another repository. B first reviews this generated playbook and makes a **one-time setup commit to `main`** so A can read it on GitHub. In this current checkout, stage only `README.md`, `AGENTS.md`, `docs/`, `.cursor/`, `.agents/`, `.github/`, `.env.example`, and `.gitignore`; leave the older untracked root `PRD.md` alone. Commands:
+The existing remote is `https://github.com/lakshay196/kanch-net-kiet.git`. Use it; do not create another repository. The initial playbook was pushed to `main` at commit `efc067a`. The prompt files in this package are a final setup-documentation update before `develop` is created. **Do not repeat the initial commit commands below** if these files are already on GitHub. The older untracked root `PRD.md` is historical and stays unstaged.
 
 ```sh
 git status
-git add README.md AGENTS.md docs .cursor .agents .github .env.example .gitignore
-git diff --cached --stat
-git commit -m "docs: add Kanch-Net v2 two-builder playbook"
-git push origin main
+git log -1 --oneline
+git remote -v
 ```
 
-This is the only direct `main` setup commit; feature work uses PRs. B then checks GitHub → repository → Settings → General for visibility; private is recommended while the team is building. B invites A via Settings → Collaborators → Add people. A accepts the emailed/GitHub invitation, then opens the repo in a browser. Personal repositories have owner and collaborator roles, so A receives collaborator write access, and the team enforces B's release authority by process. [GitHub's collaborator guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository) documents the current UI.
+After `develop` exists, feature work uses PRs. B checks GitHub → repository → Settings → General for visibility; private is recommended while the team is building. B invites A via Settings → Collaborators → Add people. A accepts the emailed/GitHub invitation, then opens the repo in a browser. Personal repositories have owner and collaborator roles, so A receives collaborator write access, and the team enforces B's release authority by process. [GitHub's collaborator guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository) documents the current UI.
 
 If starting a fresh project elsewhere, B would create **one** private GitHub repository with README and `.gitignore`, invite A, then both clone that same URL. That alternative is not needed here.
 

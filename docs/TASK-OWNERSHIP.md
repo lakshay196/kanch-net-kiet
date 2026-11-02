@@ -26,6 +26,8 @@ Review and acceptance do not transfer implementation ownership. No task is assig
 | `package.json`, `package-lock.json`, `next.config.ts`, `tsconfig.json`, ESLint/PostCSS config | B |
 | `.env.example`, `.gitignore`, `.github/**`, Vercel config, `AGENTS.md`, `.cursor/rules/**`, Antigravity workspace rules if later created | B |
 | `docs/GUIDE-A.md` and design reference/token notes | A |
+| `docs/BUILDER-A-PROMPT.md` | A |
+| `docs/BUILDER-B-PROMPT.md` | B |
 | All other playbook docs and unallocated source files | B |
 | `docs/PRD.md` | B is primary custodian; source stays frozen and any revision uses a separate team-approved PR |
 

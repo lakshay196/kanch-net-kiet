@@ -4,6 +4,7 @@ Builder B is the primary editor. Each builder reports phase completion in the PR
 
 | Gate | Owner | State | Evidence |
 |---|---|---|---|
+| Playbook baseline on main | B | Complete | Commit `efc067a` |
 | R0 app import | B | Pending | Import PR and build |
 | C0 contract approved by both | B | Pending | Approval comments |
 | A1–A4 frontend | A | Pending | Phase PRs, screenshots |
