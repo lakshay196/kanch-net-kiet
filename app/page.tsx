@@ -1,3 +1,4 @@
+import Link from "next/link";
 import LoginForm from "@/components/LoginForm";
 
 export default function HomePage() {
@@ -10,6 +11,11 @@ export default function HomePage() {
       <p className="mt-3 text-[#5c4638]">
         Small home piles become one matching buyer order. This is a student demo.
         Money on later screens is fake.
+      </p>
+      <p className="mt-4 text-sm">
+        <Link className="font-semibold text-[#8b1e14] underline" href="/demo">
+          Open the independent demo
+        </Link>
       </p>
       <div className="mt-8 rounded-3xl border border-[#ead9c4] bg-white p-5 shadow-sm">
         <p className="mb-4 text-sm text-[#5c4638]">
