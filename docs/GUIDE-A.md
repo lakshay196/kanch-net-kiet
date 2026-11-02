@@ -10,7 +10,17 @@ Prerequisites: GitHub collaborator access; Cursor; Git; Node version required by
 
 Product personality: calm, trustworthy craft logistics. Use a warm off-white canvas, dark readable type, one bangle-red accent, restrained status colour, generous spacing, crisp dividers, and no generic gradient hero. Put the four stages on one page with a persistent progress rail and clear role labels. The buyer request is the first visual focus; the plan's 1,000-piece coverage and shortfall are the second. Keep dense batch data scannable: visible labels, units, locality, eligibility reason, and a single clear next action. Hindi and English may appear together, with correct Devanagari glyphs and comfortable line height.
 
-Use a small token set in demo-only CSS: background/surface/text/muted/accent/success/warning/error, spacing scale 4/8/12/16/24/32, radii 8/12, and typography scale. Avoid changing global CSS merely for the demo. Use responsive cards or horizontally scrollable data only when labels remain available; do not clip important controls. Use CSS transitions for stage changes and explicit focus/hover/pressed states; respect `prefers-reduced-motion`. Do not animate money or eligibility in a way that hides a change.
+Use a small token set in demo-only CSS: background/surface/text/muted/accent/success/warning/error, spacing scale 4/8/12/16/24/32, radii 8/12, and typography scale. Avoid changing global CSS merely for the demo.
+
+## A1 recorded tokens
+
+Inspected on 2 November 2026.
+
+Imported shell (`app/globals.css`, `app/page.tsx`): warm page `#f6efe4`, text `#2a1810`, muted `#5c4638`, bangle red `#8b1e14`, card border `#ead9c4`, white cards, Geist body, login on `/`. Adapted the cream page, dark text, and single red accent. Left the login, phone list, and old tour off `/demo`.
+
+Live reference [redesign-kench-net.vercel.app](https://redesign-kench-net.vercel.app/): solid maroon field `#4a0e12`, cream cards `#fdf8f4`, gold display `#d4af37`, serif headline, Devanagari क mark, 12px controls. Adapted the solid red bar, cream cards, serif bilingual title, क mark, and role labels. Did not adapt the gradient splash, portal login, grade control, escrow language, or 10,000-piece tour.
+
+`/demo` tokens in `app/demo/demo.css`: background `#faf0e4`, surface `#fdf8f4`, text `#1a1210`, muted `#5c4638`, accent `#8b1e14`, success `#1f4f39` on `#eaf4ee`, warning `#705800` on `#fdf8e5`, error `#8c1d1d` on `#ffcdd6`. Spacing 4/8/12/16/24/32. Radii 8 and 12. Display is Noto Serif Devanagari. UI text is Noto Sans Devanagari with Geist. Gold is not a second interactive accent. Use responsive cards or horizontally scrollable data only when labels remain available; do not clip important controls. Use CSS transitions for stage changes and explicit focus/hover/pressed states; respect `prefers-reduced-motion`. Do not animate money or eligibility in a way that hides a change.
 
 Reference research, adapted rather than copied: [Mobbin's dashboard study](https://mobbin.com/blog/what-good-dashboard-design-looks-like) for prioritizing the next decision over raw metrics; [Land-book's store gallery](https://land-book.com/design/website/store) for editorial product hierarchy and imagery restraint; [UP ODOP Firozabad](https://odopup.in/en/districts/firozabad) for product context, **not** government UI imitation. Before coding, A saves 2–3 screenshots or links in an A-owned design note with the exact element to adapt, then reviews the rendered page against them. Awwwards, Godly, Dribbble, and 21st.dev are optional discovery sources; do not add unverified components merely because they look polished.
 
