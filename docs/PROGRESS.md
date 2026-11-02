@@ -5,6 +5,7 @@ Builder B is the primary editor. Each builder reports phase completion in the PR
 | Gate | Owner | State | Evidence |
 |---|---|---|---|
 | Playbook baseline on main | B | Complete | Commit `efc067a` |
+| Source foundation decision | B | Complete | User selected committed `kanch-net/main@4fae0a6` for code; live redesign for visual reference; see `PROTOTYPE-BASELINE.md` |
 | R0 app import | B | Pending | Import PR and build |
 | C0 contract approved by both | B | Pending | Approval comments |
 | A1–A4 frontend | A | Pending | Phase PRs, screenshots |

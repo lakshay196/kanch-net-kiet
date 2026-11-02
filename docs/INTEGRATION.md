@@ -4,8 +4,8 @@ Only completed, reviewed phase PRs enter `develop`. Builder B checks `git status
 
 | Checkpoint | A ready | B ready | Branch/PR order and pull | Required proof |
 |---|---|---|---|---|
-| I0 initial setup | Can access repo; reviews app shell | `develop` created; `feat/b-app-import` complete | Merge B import PR; both pull clean `develop` | `npm ci`, `npm run lint`, `npm run build`, old shell opens |
-| I1 design and foundation | A1 visual shell PR | B1 types/seed/test PR | Merge B1 first, then A1; both pull | A imports types; no shared-file overlap; 390/1440px screenshots |
+| I0 initial setup | Can access repo; reviews imported routes and live visual cues | `develop` created; `feat/b-app-import` exports committed source and records SHA | Merge B import PR; both pull clean `develop` | `npm ci`, `npm run lint`, `npm run build`, old routes open |
+| I1 design and foundation | A1 visual shell PR based on live redesign identity | B1 types/seed/test PR | Merge B1 first, then A1; both pull | A imports types; no shared-file overlap; 390/1440px screenshots compared with live reference |
 | I2 first API integration | A2 adapter and typed mocks | B2 fallback and B5 route contract | Merge B2; B5 route PR; A replaces mock in A-owned adapter PR | `curl` 200/400, browser no-key T1–T3/T16–T18 |
 | I3 authentication checkpoint | Role-labelled stage UI only | No auth service | No auth PR; document checkpoint as not applicable | No login gate, token, or false role permission claim |
 | I4 core feature integration | A3/A4 stages complete | B3 planner and B4 inventory/settlement complete | Merge B3 then B4, then A3/A4 or their binding PRs; both pull | T4–T15, no duplicate, shortfall lock, balance, exact money |

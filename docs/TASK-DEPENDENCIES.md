@@ -2,7 +2,7 @@
 
 | Milestone | A can do | B can do | Must wait for | Integration owner |
 |---|---|---|---|---|
-| R0 repository import | Review existing visual shell and v2 flows | Import app source, reconcile instructions, build | B's import PR merged before coding | B |
+| R0 repository import | Review live redesign identity and imported old routes | Export committed `kanch-net/main` snapshot, import, build | B's import PR merged before coding | B |
 | C0 contract freeze | Review field names, UI stages, fixture needs | Finalize types, seed, responses | Both humans approve contract | B |
 | F1 foundation | Create visual direction and static shell after R0 | Publish types, seed, local parser | A needs agreed types before real binding | B |
 | F2 parallel build | Build stages with typed mocks, responsive states | Build rules, inventory, settlement, routes | Neither waits for the other's implementation | B |

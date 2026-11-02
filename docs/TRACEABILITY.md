@@ -39,6 +39,7 @@ Each row has one implementation owner. The corresponding visual or domain counte
 | P33 `11.6 | Rate is illustrative, no verified reputation claim | A | A3 | Visible label on every supplier row | Planned |
 | P34 `11.6 | Rate formula and “not enough history” fallback | B | B4 | Unit tests for inspected denominator/empty history | Planned |
 | P35 `14 | Four visible stages on one `/demo` page | A | A1–A4 | Browser T1/T20 | Planned |
+| P35a `14`; source decision | New `/demo` fits the live Kanch-Net visual identity while keeping v2 flow separate from old tour | A | A1 | Screenshots compared with live reference; no old grade/escrow in `/demo` | Planned |
 | P36 `14.3 | No QR, real payment, government login/API, grade, extra categories | B | B0–B5 | Code/diff audit before release | Planned |
 | P37 `15, `17 | Seed/module state, no database | B | B1 | No DB connection/migrations | Planned |
 | P37a `17–18 | Browser state resets from seed on refresh | A | A4 | T19 | Planned |

@@ -5,6 +5,7 @@
 | Resource and purpose | Location | Owner | Users | Available | Approval |
 |---|---|---|---|---|---|
 | Authoritative requirements | `docs/PRD.md` | Frozen team source; B manages PR | Both | Now | Both for revision |
+| Live prototype and source decision | `docs/PROTOTYPE-BASELINE.md` | B | Both | Now; choice recorded | Both for a future foundation change |
 | Architecture and system boundary | `docs/ARCHITECTURE.md` | B | Both | Now | Both for major change |
 | Data record specification and API contract | `docs/CONTRACT.md` | B | Both agents/builders | Before coding | Both |
 | Shared types and enums | `lib/demo/types.ts` | B | Both | Foundation PR | Both if public contract changes |

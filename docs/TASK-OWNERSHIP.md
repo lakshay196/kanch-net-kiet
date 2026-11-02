@@ -5,6 +5,7 @@
 | Task | Primary owner | Other builder | Dependency |
 |---|---|---|---|
 | App import, dependency lockfile, integration, release | B | A reviews import and UI shell | Before implementation |
+| Committed source import and live-prototype decision record | B | A reviews visual/route comparison | Decision recorded before app import |
 | Contract, types, seed, parser, glossary, catalogue fallback | B | A consumes and requests changes | Contract approval |
 | Eligibility, duplicates, planner, inventory, settlement | B | A consumes and verifies display | Contract approval |
 | Optional model routes and API tests | B | A uses mocks then API | Contract approval |
@@ -28,12 +29,13 @@ Review and acceptance do not transfer implementation ownership. No task is assig
 | `docs/GUIDE-A.md` and design reference/token notes | A |
 | `docs/BUILDER-A-PROMPT.md` | A |
 | `docs/BUILDER-B-PROMPT.md` | B |
+| `docs/PROTOTYPE-BASELINE.md` | B |
 | All other playbook docs and unallocated source files | B |
 | `docs/PRD.md` | B is primary custodian; source stays frozen and any revision uses a separate team-approved PR |
 
 The owner map applies even when a file is read by both agents. A shared file is **not** jointly editable.
 
-The initial generated playbook is a one-time baseline committed by B to `main` before A starts; A reviews the contract and A guide after receiving access. From that point onward, the primary file owners above apply to every change.
+The initial generated playbook is a one-time baseline committed by B to `main` before A starts; A reviews the contract and A guide after receiving access. B0 is a second, narrow setup exception: B may add the clean committed app snapshot, including pre-existing UI paths, without changing their content or implementing A's demo work. A reviews that import PR. After B0 merges, the primary file owners above apply to every change.
 
 ## Change request for any shared file
 

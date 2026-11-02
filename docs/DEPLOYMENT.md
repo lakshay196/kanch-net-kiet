@@ -1,6 +1,6 @@
 # Deploying the independent demo
 
-Builder B owns Vercel setup, environment variables, release merge, deployment, monitoring, and rollback. Builder A signs off rendered UI and checks the live page. Use the shared GitHub repository's imported Next.js app, not the separate legacy repository. The PRD's existing `kanch-net.vercel.app` is background; do not assume it points at the new repository. Decide whether to reconnect that existing project or create a clearly named new Vercel project after checking team ownership and preserving the old demo.
+Builder B owns Vercel setup, environment variables, release merge, deployment, monitoring, and rollback. Builder A signs off rendered UI and checks the live page. Use the shared GitHub repository's imported Next.js app. The PRD's `kanch-net.vercel.app` and the current [live redesign](https://redesign-kench-net.vercel.app/) are background/reference deployments; neither is proven to point at the new repository. Use a clearly named Vercel project for `kanch-net-kiet` unless the team explicitly selects a project it owns for this release. Preserve the existing live redesign URL while the new `/demo` is built and reviewed.
 
 ## Environments
 
@@ -14,7 +14,7 @@ There is no database deployment, migration, domain requirement, login setup, or 
 
 1. B checks clean `develop` and runs `npm ci`, `npm run test:demo`, `npm run lint`, `npm run build`. A completes browser and screenshot QA, including offline/no-key T1 and mobile/projector T20.
 2. B opens `develop → main` PR with all T1–T20 evidence, contract version, A approval, and explicit independent-demo/illustrative-data disclosure. A reviews; B merges.
-3. In Vercel Dashboard, B imports/connects `lakshay196/kanch-net-kiet`, sets framework preset Next.js and root directory `./`, selects `main` as production branch, reviews build settings, then deploys. Do not connect the sibling legacy Git repository by mistake. [Vercel Git deployment guide](https://vercel.com/docs/git).
+3. In Vercel Dashboard, B imports/connects `lakshay196/kanch-net-kiet` to the selected project, sets framework preset Next.js and root directory `./`, selects `main` as production branch, reviews build settings, then deploys. Check the repository and project names before deployment so the visual-reference site is not overwritten. [Vercel Git deployment guide](https://vercel.com/docs/git).
 4. B checks Vercel build logs for success and opens the live `/demo`. A checks actual 390px and desktop rendering. Both run sample order through settlement. B checks `/api/parse-order` fallback with no key and optional model route with key if enabled.
 5. B records production commit SHA, Vercel URL, date, test results, and known limitations in `docs/PROGRESS.md`. Do not claim official government integration or real payment.
 

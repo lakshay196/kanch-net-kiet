@@ -4,9 +4,9 @@
 
 [PRD] The deliverable is an independent glass-bangle demo at `/demo` within the existing Next.js Kanch-Net app. It is not a live ODOP integration, payment service, or production marketplace. Fictional names, quantities, scores, and money must be labelled illustrative. The core path must work without a model key or network.
 
-[RECOMMENDATION] Reuse the app's pinned Next.js 16, React 19, TypeScript, Tailwind 4, and npm lockfile. One app is simpler for two beginners than separate services. App Router serves the page and two same-origin route handlers. Use existing `lib/match.ts`, `lib/settlement.ts`, `lib/score.ts`, and `lib/places.ts` only after B checks their behaviour against v2. No new database, ORM, auth provider, queue, or state library.
+[DECISION] Use the committed `lakshay196/kanch-net` `main@4fae0a6` app's pinned Next.js 16, React 19, TypeScript, Tailwind 4, and npm lockfile. The live [redesign prototype](https://redesign-kench-net.vercel.app/) is a visual reference; its deployed code has not been mapped to that commit. See [prototype baseline](PROTOTYPE-BASELINE.md). One app is simpler for two beginners than separate services. App Router serves the page and two same-origin route handlers. Use existing `lib/match.ts`, `lib/settlement.ts`, `lib/score.ts`, and `lib/places.ts` only after B checks their behaviour against v2. No new database, ORM, auth provider, queue, or state library.
 
-[ASSUMPTION] The team may copy the existing app's tracked source into this shared repository. B owns that import PR; A reviews. Exclude `node_modules`, `.next`, `.vercel`, secrets, and old instructions that conflict with v2.
+Builder B exports committed tracked app files from the pinned source commit into this shared repository. B owns the import PR; A reviews. Exclude `node_modules`, `.next`, `.vercel`, secrets, uncommitted edits, and old instructions that conflict with v2.
 
 ## Stack choices
 
@@ -48,7 +48,7 @@ No SQL tables, migrations, login sessions, or real permissions exist in this pro
 
 ## Risks and resolution
 
-- The source app and playbook are currently in different repositories. Import is a hard gate.
+- The live redesign's exact deployed source is unverified and `main@4fae0a6` has different homepage text. The user chose committed `main` as code and the deployed site as a visual reference. A must deliberately adapt its identity to `/demo`; B0 is unblocked.
 - PRD `11.2 blocks both duplicate rows until a coordinator resolves identity, while `5.2 needs B-101 for the sample. The seeded demo starts with B-101 verified as canonical and B-105 excluded. Clearing that resolution blocks both.
 - Imported legacy helpers may encode removed grade or QR behaviour. B adapts them under `lib/demo`; do not reintroduce grade or QR.
 - In-memory reservation cannot guarantee safety across real concurrent users. State this limitation in the demo.
